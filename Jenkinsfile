@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             agent {
                 docker {
-                    image 'bitnami/kubectl:1.29'
+                    image 'instrumentisto/aws-cli-kubectl:latest'
                     args '--entrypoint=""'
                 }
             }
