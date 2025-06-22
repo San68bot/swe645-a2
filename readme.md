@@ -1,9 +1,5 @@
 # SWE645 - Assignment 2
 
-**Group Member(s):** `[Your Name(s) and Contributions]`
-
----
-
 ## Deployment URLs
 
 * **S3 Homepage URL (from HW1):** `http://smohanku-swe645-hw1.s3-website.us-east-2.amazonaws.com`
