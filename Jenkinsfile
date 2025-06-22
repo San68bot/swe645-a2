@@ -41,18 +41,21 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-                    agent {
-                        docker { image 'bitnami/kubectl:1.29' }
-                    }
-                    steps {
-                        script {
-                            withCredentials([kubeconfig(credentialsId: KUBECONFIG_CREDENTIALS_ID)]) {
-                                sh "kubectl set image deployment/swe645-deployment swe645-container=${DOCKER_REGISTRY}/${APP_NAME}:${BUILD_NUMBER}"
-                                sh "kubectl rollout status deployment/swe645-deployment"
-                            }
-                        }
+            agent {
+                docker {
+                    image 'bitnami/kubectl:1.29'
+                    args '--entrypoint=""'
+                }
+            }
+            steps {
+                script {
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        sh "kubectl set image deployment/swe645-deployment swe645-container=${DOCKER_REGISTRY}/${APP_NAME}:${env.BUILD_NUMBER}"
+                        sh "kubectl rollout status deployment/swe645-deployment"
                     }
                 }
+            }
+        }
     }
 
     post {
