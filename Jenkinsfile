@@ -43,14 +43,14 @@ pipeline {
         stage('Deploy to Kubernetes') {
             agent {
                 docker {
-                    image 'instrumentisto/aws-cli-kubectl:latest'
+                    image 'san68bot/swe645-agent:latest'
                     args '--entrypoint=""'
                 }
             }
             steps {
                 script {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh "kubectl set image deployment/swe645-deployment swe645-container=${DOCKER_REGISTRY}/${APP_NAME}:${env.BUILD_NUMBER}"
+                        sh "kubectl set image deployment/swe645-deployment swe645-container=san68bot/swe645-webapp:${env.BUILD_NUMBER}"
                         sh "kubectl rollout status deployment/swe645-deployment"
                     }
                 }
