@@ -1,0 +1,39 @@
+#
+# Sanjay Mohan Kumar
+# File: deployment.yaml
+# File Purpose: This Kubernetes configuration file defines the Deployment
+# and Service for the web application.
+#
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swe645-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swe645-webapp
+  template:
+    metadata:
+      labels:
+        app: swe645-webapp
+    spec:
+      containers:
+        - name: swe645-container
+          image: your-docker-registry/your-repo-name:latest
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swe645-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: swe645-webapp
