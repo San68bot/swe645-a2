@@ -10,7 +10,7 @@ kind: Deployment
 metadata:
   name: swe645-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: swe645-webapp
