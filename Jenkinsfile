@@ -41,15 +41,18 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    withCredentials([kubeconfig(credentialsId: KUBECONFIG_CREDENTIALS_ID)]) {
-                        sh "kubectl set image deployment/swe645-deployment swe645-container=${DOCKER_REGISTRY}/${APP_NAME}:${BUILD_NUMBER}"
-                        sh "kubectl rollout status deployment/swe645-deployment"
+                    agent {
+                        docker { image 'lachlanevenson/k8s-kubectl:v1.28.2' }
+                    }
+                    steps {
+                        script {
+                            withCredentials([kubeconfig(credentialsId: KUBECONFIG_CREDENTIALS_ID)]) {
+                                sh "kubectl set image deployment/swe645-deployment swe645-container=${DOCKER_REGISTRY}/${APP_NAME}:${BUILD_NUMBER}"
+                                sh "kubectl rollout status deployment/swe645-deployment"
+                            }
+                        }
                     }
                 }
-            }
-        }
     }
 
     post {
