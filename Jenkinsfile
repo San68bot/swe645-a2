@@ -42,7 +42,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
                     agent {
-                        docker { image 'lachlanevenson/k8s-kubectl:v1.28.2' }
+                        docker { image 'bitnami/kubectl:1.29' }
                     }
                     steps {
                         script {
