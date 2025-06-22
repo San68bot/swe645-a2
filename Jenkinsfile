@@ -50,8 +50,10 @@ pipeline {
             steps {
                 script {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh "kubectl set image deployment/swe645-deployment swe645-container=san68bot/swe645-webapp:${env.BUILD_NUMBER}"
-                        sh "kubectl rollout status deployment/swe645-deployment"
+                        withCredentials([aws(credentialsId: 'aws-credentials')]) {
+                            sh "kubectl set image deployment/swe645-deployment swe645-container=san68bot/swe645-webapp:${env.BUILD_NUMBER}"
+                            sh "kubectl rollout status deployment/swe645-deployment"
+                        }
                     }
                 }
             }
