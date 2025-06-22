@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: swe645-container
-          image: your-docker-registry/your-repo-name:latest
+          image: san68bot/swe645-webapp:latest
           ports:
             - containerPort: 80
 
