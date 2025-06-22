@@ -54,7 +54,7 @@ This section details the setup of the environment and tools used.
         4.  The "Script Path" should be `Jenkinsfile`.
 
 ### **Demonstration Video**
-The video recording demonstrates the following:
+The video recording demonstrates the following: https://youtu.be/_wmDQAL39uU
 1.  A walkthrough of the files (`Dockerfile`, `Jenkinsfile`, `deployment.yaml`).
 2.  A manual build and push of the Docker image.
 3.  A manual deployment to Kubernetes using `kubectl apply -f k8s/deployment.yaml`.
